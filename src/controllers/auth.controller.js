@@ -24,6 +24,8 @@ export async function login(req, res) {
 export async function registro(req, res) {
   const { nombre, whatsapp, torre, apartamento, unidad_residencial, contrasena } = req.body;
 
+  console.log('Body recibido:', req.body); // 🕵️ Ver qué llega
+
   try {
     const [exists] = await db.query('SELECT * FROM cliente WHERE whatsapp = ?', [whatsapp]);
     if (exists.length > 0) return res.status(400).json({ error: 'El número ya está registrado' });
@@ -36,7 +38,9 @@ export async function registro(req, res) {
     );
 
     res.status(201).json({ message: 'Usuario registrado', id: result.insertId });
-  } catch (error) {
+  } 
+  catch (error) {
+    console.error('Error en registro:', error); // 💥 Log de error visible en Railway
     res.status(500).json({ error: 'Error al registrar usuario' });
   }
 }
