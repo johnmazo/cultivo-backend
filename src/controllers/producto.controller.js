@@ -9,7 +9,6 @@ export const getProductos = async (req, res) => {
   }
 };
 
-
 export const getProductoById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -31,11 +30,11 @@ export const createProducto = async (req, res) => {
     }
 
     const [result] = await db.query(
-      'INSERT INTO producto (nombre, precio, categoria, url_imagen) VALUES (?, ?, ?, ?)',
-      [nombre, precio, categoria, url_imagen]
+      'INSERT INTO producto (nombre, medida, precio, categoria, url_imagen) VALUES (?, ?, ?, ?, ?)',
+      [nombre, medida, precio, categoria, url_imagen]
     );
 
-    res.status(201).json({ id: result.insertId, nombre, precio, categoria, url_imagen });
+    res.status(201).json({ id: result.insertId, nombre, medida, precio, categoria, url_imagen });
   } catch (error) {
     res.status(500).json({ error: 'Error al crear el producto' });
   }
@@ -45,11 +44,11 @@ export const createProducto = async (req, res) => {
 export const updateProducto = async (req, res) => {
   try {
     const { id } = req.params;
-    const { nombre, precio, categoria, url_imagen } = req.body;
+    const { nombre, medida, precio, categoria, url_imagen } = req.body;
 
     await db.query(
-      'UPDATE producto SET nombre = ?, precio = ?, categoria = ?, url_imagen = ? WHERE id = ?',
-      [nombre, precio, categoria, url_imagen, id]
+      'UPDATE producto SET nombre = ?, medida = ?, precio = ?, categoria = ?, url_imagen = ? WHERE id = ?',
+      [nombre, medida, precio, categoria, url_imagen, id]
     );
 
     res.json({ message: 'Producto actualizado' });
