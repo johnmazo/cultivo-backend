@@ -1,8 +1,10 @@
 import express from 'express';
 import db from '../config/db.js';
+import { crearPedido } from '../controllers/pedido.controller.js';
 
 const router = express.Router();
 
+router.post('/', crearPedido);
 router.post('/', async (req, res) => {
   const { cliente_id, productos, total } = req.body;
 
