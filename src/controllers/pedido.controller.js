@@ -13,7 +13,7 @@ export async function crearPedido(req, res) {
     const [result] = await db.query('INSERT INTO pedidos (cliente_id, total) VALUES (?, ?)', [cliente_id, total]);
     
     // 🟩 Preparar mensaje
-    const mensaje = `¡Hola ${clienteData[0].nombre}! 🛒 Gracias por tu compra en Cultivo.\n\nProductos:\n${productos.map(p => `• ${p.cantidad} x ${p.id} ($${p.precio})`).join('\n')}\n\nTotal: $${total}`;
+    const mensaje = `¡Hola ${clienteData[0].nombre}! 🛒 Muchas gracias por tu compra en Cultivo.\n\nProductos:\n${productos.map(p => `• ${p.cantidad} x ${p.nombre} ($${p.precio})`).join('\n')}\n\nTotal: $${total}`;
 
     // 🟨 Enviar mensaje
     await enviarMensajeWhatsApp(clienteData[0].whatsapp, mensaje);
