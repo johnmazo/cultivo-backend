@@ -10,7 +10,7 @@ export async function crearPedido(req, res) {
     if (clienteData.length === 0) return res.status(404).json({ error: 'Cliente no encontrado' });
 
     // 💾 Guardar pedido (puedes extender con insert de pedido_detalle)
-    const [result] = await db.query('INSERT INTO pedido (cliente_id, total) VALUES (?, ?)', [cliente_id, total]);
+    const [result] = await db.query('INSERT INTO pedidos (cliente_id, total) VALUES (?, ?)', [cliente_id, total]);
     
     // 🟩 Preparar mensaje
     const mensaje = `¡Hola ${clienteData[0].nombre}! 🛒 Gracias por tu compra en Cultivo.\n\nProductos:\n${productos.map(p => `• ${p.cantidad} x ${p.id} ($${p.precio})`).join('\n')}\n\nTotal: $${total}`;

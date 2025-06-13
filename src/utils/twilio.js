@@ -11,7 +11,7 @@ export async function enviarMensajeWhatsApp(to, mensaje) {
     const msg = await client.messages.create({
       body: mensaje,
       from: process.env.TWILIO_WHATSAPP_NUMBER,
-      to: `whatsapp:${to}`
+      to: `whatsapp:+57${to}`
     });
 
     console.log('📩 Mensaje enviado:', msg.sid);
